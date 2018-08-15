@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import Navmenu from './../components/Navmenu';
 import Header from './../components/Header';
 import Footer from '../components/Footer';
+import TumblrRes from '../components/TumblrRes';
 import './../styles/style.css'
 
 class Main extends Component {
@@ -29,6 +30,7 @@ class Main extends Component {
         <div>
           <Navmenu navlinks={this.state.menulinks} />
           <Header title="Qualyzer Landing Page" tagline="Qualitative Analyzer of social media trends and topics, made in React and using the free template MobApp from ColorLib. More to come once we connect to an API." />
+          <TumblrRes />
           <Footer />
         </div>
       );
