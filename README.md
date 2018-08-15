@@ -1,2 +1,2 @@
 # qualyzer
-Qualitative Analyzer of social media trends and topics
+Qualitative Analyzer of social media trends and topics, made in React and using the free template MobApp from ColorLib.
