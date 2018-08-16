@@ -20,8 +20,6 @@ class TumblrRes extends Component{
         });
 
         // Show user's blog names
-        var blogsArr = [];
-
         var promiseObj = new Promise((resolve, reject)=>{
             client.userInfo(function(err, data) {
                 var k = [];
@@ -37,16 +35,6 @@ class TumblrRes extends Component{
             this.setState({blogs: successMsg});
         });
 
-        // Show user's blog names
-        // client.userInfo(function(err, data) {
-        //     data.user.blogs.forEach(function(blog) {
-        //         console.log(blog.name);
-        //         blogsArr.push(blog.name);
-        //     });
-        // });
-
-        // this.setState({blogs: blogsArr});
-        // console.log(this.state.blogs);
     }
 
     render() {
