@@ -11,7 +11,7 @@ class Footer extends Component {
             <footer className="my-5 text-center">
             <p className="mb-2">
                 <small>
-                    COPYRIGHT &copy; 2017. ALL RIGHTS RESERVED. MOBAPP TEMPLATE BY <a href="https://colorlib.com" target="_blank" rel="noopener noreferrer">COLORLIB</a>
+                    MADE BY <a href="http://www.liselot.de/" target="_blank" rel="noopener noreferrer">LISELOT RAMIREZ</a> FOR HCI RESEARCH AND METHODS CLASS, SOSE 2018, BAUHAUS-UNIVERSITÄT WEIMAR. <br/>COPYRIGHT &copy; 2017. ALL RIGHTS RESERVED. MOBAPP TEMPLATE BY <a href="https://colorlib.com" target="_blank" rel="noopener noreferrer">COLORLIB</a>
                 </small>
             </p>
 
