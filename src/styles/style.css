@@ -15,16 +15,17 @@ Copyright © All rights Reserved
 
 /*------------------------
 [TABLE OF CONTENTS]
-    
-1. GLOBAL STYLES
-2. NAVBAR
-3. HERO
-4. TABS
-5. TESTIMONIALS
-6. IMAGE GALLERY
-7. PRICING
-8. CALL TO ACTION
-9. FOOTER
+  
+01. GLOBAL STYLES
+02. NAVBAR
+03. HERO
+04. TABS
+05. TESTIMONIALS
+06. IMAGE GALLERY
+07. PRICING
+08. CALL TO ACTION
+09. FOOTER
+10. RESPONSE STYLES
 
 ------------------------*/
 
@@ -294,29 +295,13 @@ header {
 .card.features {
     border: 0;
     border-radius: 3px;
-    box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     min-width: 10rem;
-    border: 1px #eeeeee solid;
-}
-
-.postresponse {
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.postbody {
-    font-family: 'Scope One', serif;
-    text-align: center;
-    display: inline-block;
-}
-
-.postbody p {
-    color: #1b1b1b;
-}
-
-.postbody img {
-    max-width: 200px;
+    border: 1px #bbb solid;
+    -webkit-flex: 1 1 calc(33.33% - 20px);
+    -ms-flex: 1 1 calc(33.33% - 20px);
+    flex: 1 1 calc(33.33% - 20px);
 }
 
 @media (max-width:991px) {
@@ -662,4 +647,55 @@ header {
         text-align: center;
         margin-top: 2rem;
     }
+}
+
+
+/* GLOBAL
+----------------------*/
+
+
+/* Parent */
+
+.postresponse {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.postbody {
+    font-family: 'Scope One', serif;
+    text-align: center;
+    margin-top: 12px;
+    min-width: 300px;
+    flex-grow: 1;
+}
+
+.postbody p {
+    color: #1b1b1b;
+}
+
+.postbody img {
+    max-width: 200px;
+}
+
+.postbody small {
+    text-align: left;
+    position: relative;
+    display: block;
+    padding: 0.4em;
+    background-color: #ddd;
+    color: #607D8B;
+}
+
+.posttags {
+    background-color: #b5a4c891;
+}
+
+.posttags p {
+    color: #5895d8;
+    font-size: 0.75em;
+}
+
+.tumblrres {
+    padding: 2.8rem;
 }

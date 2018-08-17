@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-// import _ from 'lodash';
+import _ from 'lodash';
 //Purify the strings you want to get from the response
+//because you don't want a random injection to whatever
+//you're pulling from the Tumblr dot com lol
 import createDOMPurify from "dompurify";
 import { JSDOM } from 'jsdom';
 import tumblrclient from './../lib/tumblrclient';
@@ -12,34 +14,37 @@ class TumblrRes extends Component{
     constructor(props){
         super(props);
         this.state = {
-            blogs: [],
+            blogs: ['zeroliam', 'qualyzer', 'randomitaes', 'one', 'two', 'three'],
             blogserr: "",
             // test for the innerHTML to pass when response = 200
-            bodytest: ""
+            bodytest: "",
+            tags: []
         }
     }
     
     componentDidMount(){
 
-        // Show user's blog names /*TEST*/
-        var promiseObj = new Promise((resolve, reject)=>{
-            tumblrclient.userInfo((err, data)=>{
-                    var k = [];
-                    data.user.blogs.forEach((blog)=>{
-                        k.push(blog.name);
-                    });
-                    resolve(k);
-                    reject(err);
-            });
-        });
+        this.getPostBody();
 
-        promiseObj.then((successMsg)=>{
-            this.setState({blogs: successMsg});
-            this.getPostBody();
-        }).catch((reason) => {
-                console.log('Handle rejected promise ('+reason+') here.');
-                this.setState({blogserr: reason.toString()});
-            });
+        // Show user's blog names /*TEST*/
+        // var promiseObj = new Promise((resolve, reject)=>{
+        //     tumblrclient.userInfo((err, data)=>{
+        //             var k = [];
+        //             data.user.blogs.forEach((blog)=>{
+        //                 k.push(blog.name);
+        //             });
+        //             resolve(k);
+        //             reject(err);
+        //     });
+        // });
+
+        // promiseObj.then((successMsg)=>{
+        //     this.setState({blogs: successMsg});
+        //     this.getPostBody();
+        // }).catch((reason) => {
+        //         console.log('Handle rejected promise ('+reason+') here.');
+        //         this.setState({blogserr: reason.toString()});
+        //     });
 
 
     }
@@ -51,16 +56,21 @@ class TumblrRes extends Component{
         this.setState({bodytest: clean});
     }
 
+    getPosts(){
+        
+        return _.map(this.state.blogs, (val, i) => {
+              return (
+                  <PostBody key={i} clean={this.state.bodytest} tags={this.state.blogs} blogtitle={val} />
+              )
+        });
+    }
+
     render() {
         return (
-            <div>
-                <h4>Tumblr Response:</h4>
-                {/* <p id="idResponse">{(this.state.blogserr === "") ? this.state.blogs.join(" || ") : this.state.blogserr}</p> */}
-                {/* Print the response */}
+            <div className="tumblrres">
+                <h3>Posts found:</h3>
                 <div className="postresponse">
-                    <PostBody clean={this.state.bodytest} />
-                    <PostBody clean={this.state.bodytest} />
-                    <PostBody clean={this.state.bodytest} />
+                    {this.getPosts()}
                 </div>
             </div>
         );
