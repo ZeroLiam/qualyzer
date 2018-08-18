@@ -11,6 +11,9 @@ class GraphPolar extends Component{
     }
 
     componentDidMount(){
+        var receivedData = this.props.graphdata;
+        console.log(receivedData);
+        
         var thedata = {
             datasets: [{
             data: [

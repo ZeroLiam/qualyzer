@@ -9,6 +9,9 @@ class Filtering extends Component{
             tag: "",
             limit: 20
         }
+
+        //To pass to parent correctly
+        this.gatherData = this.gatherData.bind(this);
     }
 
     componentDidMount(){
@@ -24,7 +27,7 @@ class Filtering extends Component{
                 this.setState({limit: parseInt(e.target.value, 10)});
                 break;
             case "datequery":
-                this.setState({timestamp: Date.parse(e.target.value)});
+                this.setState({timestamp: Date.parse(e.target.value) /1000});
                 break;
             case "tagquery":
                 this.setState({tag: e.target.value});

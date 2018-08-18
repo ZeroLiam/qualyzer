@@ -14,7 +14,8 @@ class Header extends Component {
         this.state = {
             timestamp: 0,
             tag: "",
-            limit: 20
+            limit: 20,
+            datares: {}
         }
     }
 
@@ -26,6 +27,12 @@ class Header extends Component {
 
             return prevState;
          });
+
+         //Pass to parent
+         this.props.onFilterReceived(querydata);
+
+         //Receive Tumblr data for the Graphs
+         this.setState({datares: this.props.fillData});
     }
 
     render() {
@@ -40,7 +47,7 @@ class Header extends Component {
                     <p>{this.state.timestamp} and {this.state.tag} and {this.state.limit} </p>
                 </div>
 
-                <GraphPolar />
+                <GraphPolar graphdata={this.state.datares} />
             </header>
         </div>
       );

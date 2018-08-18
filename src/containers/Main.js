@@ -1,4 +1,4 @@
-// import 'bootstrap/dist/css/bootstrap.min.css';//From node modules
+import 'bootstrap/dist/css/bootstrap.min.css';//From node modules
 // import $ from 'jquery';
 // import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';//From node modules
@@ -8,6 +8,9 @@ import Navmenu from './../components/Navmenu';
 import Header from './../components/Header';
 import Footer from '../components/Footer';
 import Tumblrdata from '../components/Tumblrdata';
+import tumblrclient from './../lib/tumblrclient';
+import {get} from './../lib/ajaxconfig';
+import apikey from './../lib/apikey';
 import './../styles/style.css';
 
 class Main extends Component {
@@ -15,22 +18,42 @@ class Main extends Component {
     super(props);
 
     this.state={
-      menulinks: [
-        {
-          link: "/",
-          linkname: "home"
-        }
-      ]
+      timestamp: 0,
+      tag: "",
+      limit: 20,
+      datares: {}
     }
+  }
+    
+  requestDataFromTumblr(querydata){
+
+    get('/tagged?tag=' + querydata.tag + '&before=' + querydata.timestamp + '&limit='+querydata.limit + apikey.key).then((data) => {
+      console.log("data received: ", data);
+    }).catch((xhr, status, data) => {
+      console.log(xhr, status, data);
+    });
+  }
+
+  receivedFilter(querydata){
+    
+      this.setState(prevState => {
+          prevState.timestamp = querydata.timestamp;
+          prevState.tag = querydata.tag;
+          prevState.limit = querydata.limit;
+
+          return prevState;
+       });
+
+    this.requestDataFromTumblr(querydata);
   }
 
   render() {
 
       return (
         <div>
-          <Navmenu navlinks={this.state.menulinks} />
-          <Header title="Qualyzer Landing Page" tagline="Qualitative Analyzer of social media trends and topics, made in React and using the free template MobApp from ColorLib. More to come once we connect to an API." />
-          <Tumblrdata />
+          <Navmenu />
+          <Header title="Qualyzer Landing Page" tagline="Qualitative Analyzer of social media trends and topics, made in React and using the free template MobApp from ColorLib. More to come once we connect to an API." onFilterReceived={this.receivedFilter.bind(this)} fillData={this.state.datares} />
+          <Tumblrdata fillData={this.state.datares} />
           <Footer />
         </div>
       );
