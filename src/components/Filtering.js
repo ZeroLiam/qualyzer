@@ -17,6 +17,7 @@ class Filtering extends Component{
     componentDidMount(){
         // Limit the date query until today (per capability of Tumblr API)
         let today = new Date().toISOString().substr(0, 10);
+        document.getElementById("datequery").setAttribute("value", today);
         document.getElementById("datequery").setAttribute("max", today);
     }
 
@@ -73,7 +74,7 @@ class Filtering extends Component{
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="limitquery-label">How many posts?</span>
                     </div>
-                    <input type="number" className="form-control" aria-label="limitquery" aria-describedby="limitquery" id="limitquery" onChange={(e) => this.handleChange(e)} />
+                    <input type="number" className="form-control" aria-label="limitquery" placeholder="max 20" min="1" max="20" aria-describedby="limitquery" id="limitquery" onChange={(e) => this.handleChange(e)} />
 
                     {/* Submit */}
                     <button id="submitquery" className="btn btn-outline-secondary" type="button" onClick={(e) => this.gatherData(e)}>Get Data!</button>
