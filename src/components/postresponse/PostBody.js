@@ -3,8 +3,11 @@ import PostTags from './PostTags';
 
 class PostBody extends Component{
 
-    getPostLink(){
+    getBlogLink(){
         return "https://" + this.props.blogtitle + ".tumblr.com/";
+    }
+    getPostLink(){
+        return this.props.posturl;
     }
 
     render(){
@@ -15,7 +18,9 @@ class PostBody extends Component{
                         <div className="media">
                             <span className="ti-settings gradient-fill ti-3x mr-3"></span>
                             <div className="media-body">
-                                <small><a href={this.getPostLink()}  target="_blank" rel="noopener noreferrer">{this.props.blogtitle}</a></small>
+                                <h4>{this.props.blogtype}</h4>
+                                <small><a href={this.getBlogLink()}  target="_blank" rel="noopener noreferrer">{this.props.blogtitle}</a></small>
+                                <small><a href={this.getPostLink()}  target="_blank" rel="noopener noreferrer">Direct link to post</a></small>
                                 <div dangerouslySetInnerHTML={{ __html: this.props.clean }} />
                                 <PostTags tags={this.props.tags} />
                             </div>

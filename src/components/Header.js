@@ -5,7 +5,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';//From node modules
 import React, { Component } from 'react';
 import GraphPolar from './../components/GraphPolar';
 import Filtering from '../components/Filtering';
-import './../styles/style.css'
+import './../styles/style.css';
+import _ from 'lodash';
 
 class Header extends Component {
     constructor(props){
@@ -15,7 +16,8 @@ class Header extends Component {
             timestamp: 0,
             tag: "",
             limit: 20,
-            datares: {}
+            datares: {},
+            totaltypes: []
         }
     }
 
@@ -24,15 +26,26 @@ class Header extends Component {
             prevState.timestamp = querydata.timestamp;
             prevState.tag = querydata.tag;
             prevState.limit = querydata.limit;
+            prevState.datares = this.props.fillData
+
+            if(!_.isEmpty(this.props.fillData)){
+                prevState.totaltypes = _.groupBy(prevState.datares, 'type');
+                // console.log(prevState.totaltypes);
+            }
 
             return prevState;
          });
 
+        //  console.log('this.state: ', this.state);
+
          //Pass to parent
          this.props.onFilterReceived(querydata);
+    }
 
-         //Receive Tumblr data for the Graphs
-         this.setState({datares: this.props.fillData});
+    generatePolarGraph(){
+        return(
+            <GraphPolar graphdata={this.state.totaltypes} />
+        );
     }
 
     render() {
@@ -44,10 +57,11 @@ class Header extends Component {
                     <p className="tagline">{this.props.tagline}</p>
                     
                     <Filtering receiveQueryDetails={(...args) => this.receivedQuery(...args)} />
-                    <p>{this.state.timestamp} and {this.state.tag} and {this.state.limit} </p>
+                    {/* <p>{this.state.timestamp} and {this.state.tag} and {this.state.limit} and {console.log("romeo: ", this.state.datares)}</p> */}
                 </div>
 
-                <GraphPolar graphdata={this.state.datares} />
+                {/* Pass data only when we have data */}
+                {(!_.isEmpty(this.state.datares)) ? this.generatePolarGraph() : ''}
             </header>
         </div>
       );

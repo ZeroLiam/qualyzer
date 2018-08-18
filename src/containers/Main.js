@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';//From node modules
 // import $ from 'jquery';
 // import Popper from 'popper.js';
+import _ from 'lodash';
 import 'bootstrap/dist/js/bootstrap.bundle.min';//From node modules
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
@@ -8,7 +9,6 @@ import Navmenu from './../components/Navmenu';
 import Header from './../components/Header';
 import Footer from '../components/Footer';
 import Tumblrdata from '../components/Tumblrdata';
-import tumblrclient from './../lib/tumblrclient';
 import {get} from './../lib/ajaxconfig';
 import apikey from './../lib/apikey';
 import './../styles/style.css';
@@ -27,11 +27,26 @@ class Main extends Component {
     
   requestDataFromTumblr(querydata){
 
-    get('/tagged?tag=' + querydata.tag + '&before=' + querydata.timestamp + '&limit='+querydata.limit + apikey.key).then((data) => {
-      console.log("data received: ", data);
-    }).catch((xhr, status, data) => {
-      console.log(xhr, status, data);
+    var promiseObj = new Promise((resolve, reject)=>{
+      get('/tagged?tag=' + querydata.tag + '&before=' + querydata.timestamp + '&offset='+querydata.limit + apikey.key).then((data) => {
+          var k = {};
+          k = data.response;
+
+          resolve(k);
+          
+        });
     });
+
+    promiseObj.then((successMsg)=>{
+        this.setState({datares: successMsg});
+        // console.log("datares: ", this.state.datares);
+        
+    }).catch((reason) => {
+            console.log('Handle rejected promise ('+reason+') here.');
+            
+        });
+
+    // console.log("this.state.datares: ", this.state.datares);
   }
 
   receivedFilter(querydata){

@@ -699,6 +699,10 @@ header {
     color: #607D8B;
 }
 
+.postbody .media-body {
+    width: 100%;
+}
+
 .posttags {
     background-color: #b5a4c891;
 }
