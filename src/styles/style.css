@@ -26,6 +26,10 @@ Copyright © All rights Reserved
 08. CALL TO ACTION
 09. FOOTER
 10. RESPONSE STYLES
+    10.1 Post responses
+    10.2 Filtering queries
+    10.3 Graph menu
+    10.4 Graph area
 
 ------------------------*/
 
@@ -229,6 +233,10 @@ p.lead {
     .navbar-nav .nav-item {
         text-align: center;
     }
+}
+
+.nav-menu.fixed-top {
+    position: absolute;
 }
 
 
@@ -654,6 +662,10 @@ header {
 ----------------------*/
 
 
+/* Post responses
+--------------------- */
+
+
 /* Parent */
 
 .postresponse {
@@ -698,4 +710,53 @@ header {
 
 .tumblrres {
     padding: 2.8rem;
+}
+
+.placeholderimg {
+    max-height: 450px;
+}
+
+
+/* Filtering queries
+--------------------- */
+
+#tagquery-label {
+    background-color: #a64194a3;
+    color: #fff;
+}
+
+#datequery-label {
+    background-color: #b84094;
+    color: #fff;
+}
+
+#limitquery-label {
+    background-color: #d93e94;
+    color: #fff;
+}
+
+#submitquery {
+    background-color: #383838;
+    color: #fff;
+}
+
+#submitquery:hover {
+    background-color: #7b7b7b;
+    color: #fff;
+}
+
+
+/* Graph area
+--------------------- */
+
+#grapharea {
+    max-width: 720px;
+    position: relative;
+    padding: 2rem;
+    background-color: #ffffff96;
+    margin: 20px auto 20px;
+}
+
+.graphs {
+    padding: 2rem;
 }

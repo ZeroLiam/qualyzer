@@ -14,37 +14,36 @@ class TumblrRes extends Component{
     constructor(props){
         super(props);
         this.state = {
-            blogs: ['zeroliam', 'qualyzer', 'randomitaes', 'one', 'two', 'three'],
+            blogs: [],
             blogserr: "",
             // test for the innerHTML to pass when response = 200
             bodytest: "",
-            tags: []
+            tags: [],
+            datares: {}
         }
     }
     
     componentDidMount(){
 
-        this.getPostBody();
-
         // Show user's blog names /*TEST*/
-        // var promiseObj = new Promise((resolve, reject)=>{
-        //     tumblrclient.userInfo((err, data)=>{
-        //             var k = [];
-        //             data.user.blogs.forEach((blog)=>{
-        //                 k.push(blog.name);
-        //             });
-        //             resolve(k);
-        //             reject(err);
-        //     });
-        // });
+        var promiseObj = new Promise((resolve, reject)=>{
+            tumblrclient.userInfo((err, data)=>{
+                    var k = [];
+                    data.user.blogs.forEach((blog)=>{
+                        k.push(blog.name);
+                    });
+                    resolve(k);
+                    reject(err);
+            });
+        });
 
-        // promiseObj.then((successMsg)=>{
-        //     this.setState({blogs: successMsg});
-        //     this.getPostBody();
-        // }).catch((reason) => {
-        //         console.log('Handle rejected promise ('+reason+') here.');
-        //         this.setState({blogserr: reason.toString()});
-        //     });
+        promiseObj.then((successMsg)=>{
+            this.setState({blogs: successMsg});
+            this.getPostBody();
+        }).catch((reason) => {
+                console.log('Handle rejected promise ('+reason+') here.');
+                this.setState({blogserr: reason.toString()});
+            });
 
 
     }
