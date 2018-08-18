@@ -67,7 +67,7 @@ class Main extends Component {
       return (
         <div>
           <Navmenu />
-          <Header title="Qualyzer Landing Page" tagline="Qualitative Analyzer of social media trends and topics, made in React and using the free template MobApp from ColorLib. More to come once we connect to an API." onFilterReceived={this.receivedFilter.bind(this)} fillData={this.state.datares} />
+          <Header title="Qualyzer Landing Page" tagline="Qualitative Analyzer of social media trends and topics, made in React and using the free template MobApp from ColorLib. Current version only handles Tumblr's API." onFilterReceived={this.receivedFilter.bind(this)} fillData={this.state.datares} />
           <Tumblrdata fillData={this.state.datares} />
           <Footer />
         </div>

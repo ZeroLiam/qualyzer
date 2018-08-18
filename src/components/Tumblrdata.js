@@ -27,7 +27,20 @@ class Tumblrdata extends Component{
 
         console.log(this.props.fillData);
         return _.map(this.props.fillData, (val, i)=>{
-            var dirty = val.caption;
+            var dirty = null;
+            var isPhoto = null;
+            var isVideo = null;
+
+            if(val.type === "photo"){
+                isPhoto = "<img src='" + val.photos[0].alt_sizes[0].url +"' />";
+                dirty = val.caption;
+            }else if(val.type === "video"){
+                isVideo = val.player[0].embed_code;
+                dirty = val.reblog.comment;
+            }else{
+                dirty = val.reblog.comment;
+            }
+
             var cleanhtml =  xss(dirty);
             var alltags = val.tags;
             var title = val.blog_name;
@@ -35,7 +48,7 @@ class Tumblrdata extends Component{
             var postlink = val.post_url;
 
             return (
-                <PostBody key={i} clean={cleanhtml} tags={alltags} blogtitle={title} blogtype={type} posturl={postlink} />
+                <PostBody key={i} clean={cleanhtml} tags={alltags} blogtitle={title} blogtype={type} posturl={postlink} postimage={(isPhoto !== null) ? isPhoto : ''} postvideo={(isVideo !== null) ? isVideo : ''} />
             )
         });
         /* blog_name

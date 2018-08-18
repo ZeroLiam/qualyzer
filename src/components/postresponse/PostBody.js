@@ -21,6 +21,8 @@ class PostBody extends Component{
                                 <h4>{this.props.blogtype}</h4>
                                 <small><a href={this.getBlogLink()}  target="_blank" rel="noopener noreferrer">{this.props.blogtitle}</a></small>
                                 <small><a href={this.getPostLink()}  target="_blank" rel="noopener noreferrer">Direct link to post</a></small>
+                                <div dangerouslySetInnerHTML={{ __html: this.props.postvideo }} />
+                                <div dangerouslySetInnerHTML={{ __html: this.props.postimage }} />
                                 <div dangerouslySetInnerHTML={{ __html: this.props.clean }} />
                                 <PostTags tags={this.props.tags} />
                             </div>
