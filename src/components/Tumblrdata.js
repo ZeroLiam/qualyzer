@@ -3,12 +3,13 @@ import _ from 'lodash';
 //Purify the strings you want to get from the response
 //because you don't want a random injection to whatever
 //you're pulling from the Tumblr dot com lol
-import createDOMPurify from "dompurify";
-import { JSDOM } from 'jsdom';
+// import createDOMPurify from "dompurify";
+// import { JSDOM } from 'jsdom';
+import xss from 'xss';
 import tumblrclient from './../lib/tumblrclient';
 import PostBody from './postresponse/PostBody';
-const window = (new JSDOM('')).window;
-const DOMPurify = createDOMPurify(window);
+// const window = (new JSDOM('')).window;
+// const DOMPurify = createDOMPurify(window);
 
 class Tumblrdata extends Component{
     constructor(props){
@@ -27,7 +28,7 @@ class Tumblrdata extends Component{
         console.log(this.props.fillData);
         return _.map(this.props.fillData, (val, i)=>{
             var dirty = val.caption;
-            var cleanhtml = DOMPurify.sanitize(dirty);
+            var cleanhtml =  xss(dirty);
             var alltags = val.tags;
             var title = val.blog_name;
             var type = val.type;
