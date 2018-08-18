@@ -7,10 +7,7 @@ export default function ajax(opts) {
         url: `${apiconfig.host}${opts.path}`,
         dataType: 'json',
         data: opts.data,
-        type: "GET",
-        xhrFields: {
-      		withCredentials: true
-   		}
+        type: "GET"
     }, opts)).catch((err) => {
     	console.error(err);
         //if it's a 401 then redirect to the login.
